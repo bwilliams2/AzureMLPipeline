@@ -1,0 +1,46 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+variables:
+  GROUP: 'AzureMLRG'
+  WORKSPACE: 'AzureMLWS'
+  LOCATION: "eastus"
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: AzureCLI@2
+  name: InstalAzML
+  inputs:
+    azureSubscription: 'BW-SandBox'
+    scriptType: bash
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az upgrade --yes
+      az extension add -n ml
+      az configure --defaults group=$GROUP workspace=$WORKSPACE location=$LOCATION
+
+
+- task: AzureCLI@2
+  name: CreateEndpoint
+  inputs:
+    azureSubscription: 'BW-SandBox'
+    scriptType: bash
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az ml online-endpoint create -f project/endpoint.yaml
+
+- task: AzureCLI@2
+  name: CreateEndpointDeployment
+  inputs:
+    azureSubscription: 'BW-SandBox'
+    scriptType: bash
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az ml online-deployment create --endpoint-name  pytorch-model-endpoint -f project/deployment.yaml --all-traffic
