@@ -8,7 +8,7 @@ trigger:
 
 variables:
   GROUP: 'AzureMLRG'
-  WORKSPACE: 'AzureWS'
+  WORKSPACE: 'AzureMLWS'
   LOCATION: "us-east"
 
 pool:
