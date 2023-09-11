@@ -9,7 +9,7 @@ trigger:
 variables:
   GROUP: 'AzureMLRG'
   WORKSPACE: 'AzureMLWS'
-  LOCATION: "us-east"
+  LOCATION: "eastus"
 
 pool:
   vmImage: ubuntu-latest
