@@ -15,9 +15,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-  condition: 
 - task: AzureCLI@2
   name: InstalAzML
   inputs:
@@ -28,7 +25,6 @@ steps:
       az upgrade --yes
       az extension add -n ml
       az configure --defaults group=$GROUP workspace=$WORKSPACE location=$LOCATION
-
 
 - task: AzureCLI@2
   name: CreateCompute
