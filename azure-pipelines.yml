@@ -6,6 +6,11 @@
 trigger:
 - main
 
+variables:
+  GROUP: 'AzureMLRG'
+  WORKSPACE: 'AzureWS'
+  LOCATION: "us-east"
+
 pool:
   vmImage: ubuntu-latest
 
@@ -20,8 +25,10 @@ steps:
     scriptType: bash
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az upgrade
+      az upgrade --yes
       az extension add -n ml
+      az configure --defaults group=$GROUP workspace=$WORKSPACE location=$LOCATION
+
 
 - task: AzureCLI@2
   name: CreateCompute

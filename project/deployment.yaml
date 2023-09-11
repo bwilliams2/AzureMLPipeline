@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: triton-cc-deployment
+endpoint_name: pytorch-model-deployment
+model: azureml:pytorch-test@latest
+instance_type: Standard_NC8as_T4_v3
+instance_count: 1
