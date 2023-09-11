@@ -150,7 +150,7 @@ def main(args):
         mlflow.pytorch.log_model(
             pytorch_model=model,
             registered_model_name=args.registered_model_name,
-            artifact_path=f"{args.model_dir}/model",
+            artifact_path="model",
         )
 
         # log model
