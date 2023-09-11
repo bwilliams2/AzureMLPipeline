@@ -48,7 +48,11 @@ steps:
     inlineScript: |
       az ml environment create --file project/environment.yml
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: AzureCLI@2
+  name: TrainModel
+  inputs:
+    azureSubscription: 'BW-SandBox'
+    scriptType: bash
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az ml job create --file project/pipeline.yml
