@@ -1,5 +1,5 @@
 $schema: https://azuremlschemas.azureedge.net/latest/amlCompute.schema.json 
-name: gpu_cluster
+name: gpu-cluster
 type: amlcompute
 size: STANDARD_ND40RS_V2
 tier: low_priority
