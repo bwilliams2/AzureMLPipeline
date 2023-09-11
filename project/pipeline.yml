@@ -13,7 +13,7 @@ jobs:
       tar -xvzf cifar-10-python.tar.gz -C ${{outputs.cifar}};
       rm cifar-10-python.tar.gz;
     compute: azureml:gpu-cluster
-    environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu@latest
+    environment: azureml:prepenvironment@latest
     outputs:
       cifar:
         type: uri_folder
@@ -25,6 +25,7 @@ jobs:
       --data-dir ${{inputs.cifar}}
       --epochs ${{inputs.epochs}}
       --model-dir ${{outputs.model_dir}}
+      --registered-model-name pytorch-test
     code: src/train-model
     inputs:
       epochs: 1

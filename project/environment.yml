@@ -1,0 +1,5 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: prepenvironment
+image: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu@latest
+# conda_file: conda-yamls/pydata.yml
+description: Environment created from a Docker image plus Conda environment.
