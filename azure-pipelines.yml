@@ -14,12 +14,32 @@ steps:
   displayName: 'Run a one-line script'
   condition: 
 - task: AzureCLI@2
+  name: InstalAzML
   inputs:
     azureSubscription: 'BW-SandBox'
-    scriptType: 'pscore'
+    scriptType: bash
     scriptLocation: 'inlineScript'
     inlineScript: |
+      az upgrade
       az extension add -n ml
+
+- task: AzureCLI@2
+  name: CreateCompute
+  inputs:
+    azureSubscription: 'BW-SandBox'
+    scriptType: bash
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az ml compute create --file project/compute.yml
+
+- task: AzureCLI@2
+  name: CreateEnvironment
+  inputs:
+    azureSubscription: 'BW-SandBox'
+    scriptType: bash
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az ml environment create --file project/environment.yml
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
