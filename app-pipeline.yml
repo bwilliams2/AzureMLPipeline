@@ -41,9 +41,7 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az upgrade --yes
-          az acr build -t ${imageRepository}:$(build.buildid) \
-            -r ${containerRegistry} \
-            -f Dockerfile ${dockerfilePath}
+          az acr build -t ${imageRepository}:$(build.buildid) -r ${containerRegistry} -f Dockerfile ${dockerfilePath}
 
     ## Add the below snippet at the end of your pipeline
     - task: AzureWebAppContainer@1
