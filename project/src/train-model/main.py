@@ -153,7 +153,7 @@ def main(args):
             artifact_path="model",
         )
         # log model
-        mlflow.pytorch.save_model(model, f"{args.model_dir}/model")
+        # mlflow.pytorch.save_model(model, f"{args.model_dir}/model")
 
 
 def parse_args():
