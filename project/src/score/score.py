@@ -28,12 +28,6 @@ def init():
     model_path = os.path.join(os.getenv("AZUREML_MODEL_DIR"), "model", "data", "model.pth")
     # deserialize the model file back into a sklearn model
 
-
-    # define test dataset DataLoaders
-    transform = transforms.Compose(
-        [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
-    )
-
     # load model
     model = torch.load(model_path, map_location=lambda storage, loc: storage)
     # model = model.to(device)

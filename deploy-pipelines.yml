@@ -43,4 +43,5 @@ steps:
     scriptType: bash
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az ml online-deployment create --endpoint-name  pytorch-model-endpoint -f project/deployment.yaml --all-traffic
+      az ml online-deployment create --endpoint-name  pytorch-model-endpoint -f project/deployment.yaml --all-traffic || \
+      az ml online-deployment update --endpoint-name  pytorch-model-endpoint -f project/deployment.yaml --all-traffic
