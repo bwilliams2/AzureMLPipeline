@@ -1,0 +1,54 @@
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables: 
+  ## Add this under variables section in the pipeline
+  azureSubscription: 'BW-Demo-SandBox'
+  appName: streamlit-pytorch-ml-app 
+  containerRegistry: 24fa969cc6044fa287d354ceca4eb111
+  imageRepository: pytorchmlapp
+  dockerfilePath: '$(Build.SourcesDirectory)/project/frontend/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    # - task: Docker@2
+    #   displayName: Build and push an image to container registry
+    #   inputs:
+    #     command: buildAndPush
+    #     repository: $(imageRepository)
+    #     dockerfile: $(dockerfilePath)
+    #     containerRegistry: $(dockerRegistryServiceConnection)
+    #     tags: |
+    #       $(tag)
+    - task: AzureCLI@2
+      name: InstalAzML
+      inputs:
+        azureSubscription: $(azureSubscription)
+        scriptType: bash
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az upgrade --yes
+          az acr build --image ${imageRepository} \
+            --registry ${containerRegistry} \
+            --file Dockerfile ${dockerfilePath}
+
+    ## Add the below snippet at the end of your pipeline
+    - task: AzureWebAppContainer@1
+      displayName: 'Azure Web App on Container Deploy'
+      inputs:
+        azureSubscription: $(azureSubscription)
+        appName: $(appName)
+        imageName: $(containerRegistry)/$(imageRepository):$(tag)

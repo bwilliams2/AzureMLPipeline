@@ -1,6 +1,10 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: pytorch-test-deployment
+name: pytorch-deployment
 endpoint_name: pytorch-model-deployment
 model: azureml:pytorch-test@latest
+code_configuration:
+  code: "./src/score/"
+  scoring_script: score.py
+environment: azureml:AzureML-ACPT-pytorch-1.13-py38-cuda11.7-gpu@latest
 instance_type: Standard_NC4as_T4_v3
 instance_count: 1

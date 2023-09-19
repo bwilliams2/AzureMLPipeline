@@ -7,6 +7,7 @@
 # imports
 import os
 import mlflow
+from mlflow.models import infer_signature
 import argparse
 
 import torch
@@ -146,12 +147,6 @@ def main(args):
 
     if not distributed or rank == 0:
         print("Registering the model via MLFlow")
-        mlflow.pytorch.save_model(model, f"{args.model_dir}/model")
-        mlflow.pytorch.log_model(
-            pytorch_model=model,
-            registered_model_name=args.registered_model_name,
-            artifact_path="model",
-        )
 
         # log model
         mlflow.pytorch.save_model(model, f"{args.model_dir}/model")
