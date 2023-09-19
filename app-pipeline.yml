@@ -34,7 +34,7 @@ stages:
     #     tags: |
     #       $(tag)
     - task: AzureCLI@2
-      name: InstalAzML
+      name: BuildAndPush
       inputs:
         azureSubscription: 'BW-SandBox'
         scriptType: bash

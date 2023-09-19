@@ -20,17 +20,10 @@ def main():
         # Display the uploaded image
         st.image(uploaded_file, caption='Uploaded Image.', use_column_width=True)
         # Convert uploaded file to a numpy array
-        image_array = process_uploaded_file(uploaded_file)
-        st.write("Shape of the image array:", image_array.shape)
-    
-def process_uploaded_file(uploaded_file):
-    # Open the uploaded image using PIL
-    image = Image.open(uploaded_file)
-    
-    # Convert uploaded file to a numpy array
-    result = process_uploaded_file(uploaded_file)
-    st.write("Image Label:", result["label"])
-    st.write("Label Probability:", result["probability"])
+        result = process_uploaded_file(uploaded_file)
+        # st.write("Shape of the image array:", image_array.shape)
+        st.write("Image Label:", result["label"])
+        st.write("Label Probability:", result["probability"])
     
 def process_uploaded_file(uploaded_file):
     # Open the uploaded image using PIL
