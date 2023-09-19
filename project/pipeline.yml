@@ -41,20 +41,20 @@ jobs:
       process_count_per_instance: 1
     resources:
       instance_count: 2
-  eval_model:
-    type: command
-    command: >-
-      python main.py
-      --data-dir ${{inputs.cifar}}
-      --model-dir ${{inputs.model_dir}}/model
-    code: src/eval-model
-    environment: azureml:AzureML-ACPT-pytorch-1.13-py38-cuda11.7-gpu@latest
-    compute: azureml:gpu-cluster
-    distribution:
-      type: pytorch
-      process_count_per_instance: 1
-    resources:
-      instance_count: 2
-    inputs:
-      cifar: ${{parent.jobs.get_data.outputs.cifar}}
-      model_dir: ${{parent.jobs.train_model.outputs.model_dir}}
+  # eval_model:
+  #   type: command
+  #   command: >-
+  #     python main.py
+  #     --data-dir ${{inputs.cifar}}
+  #     --model-dir ${{inputs.model_dir}}/model
+  #   code: src/eval-model
+  #   environment: azureml:AzureML-ACPT-pytorch-1.13-py38-cuda11.7-gpu@latest
+  #   compute: azureml:gpu-cluster
+  #   distribution:
+  #     type: pytorch
+  #     process_count_per_instance: 1
+  #   resources:
+  #     instance_count: 2
+  #   inputs:
+  #     cifar: ${{parent.jobs.get_data.outputs.cifar}}
+  #     model_dir: ${{parent.jobs.train_model.outputs.model_dir}}
