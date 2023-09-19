@@ -41,7 +41,7 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az upgrade --yes
-          az acr build --image ${imageRepository} \
+          az acr build -t ${imageRepository}:$(build.buildid) \
             --registry ${containerRegistry} \
             --file Dockerfile ${dockerfilePath}
 
