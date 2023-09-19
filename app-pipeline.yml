@@ -8,7 +8,7 @@ variables:
   ## Add this under variables section in the pipeline
   azureSubscription: BW-SandBox
   appName: streamlit-pytorch-ml-app 
-  containerRegistry: 24fa969cc6044fa287d354ceca4eb111
+  containerRegistry: '24fa969cc6044fa287d354ceca4eb111'
   imageRepository: pytorchmlapp
   dockerfilePath: '$(Build.SourcesDirectory)/project/frontend/Dockerfile'
   tag: '$(Build.BuildId)'
@@ -41,7 +41,7 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az upgrade --yes
-          az acr build -t ${imageRepository}:$(build.buildid) -r ${containerRegistry} -f Dockerfile ${dockerfilePath}
+          az acr build -t ${imageRepository}:$(build.buildid) -r 24fa969cc6044fa287d354ceca4eb111 -f Dockerfile ${dockerfilePath}
 
     ## Add the below snippet at the end of your pipeline
     - task: AzureWebAppContainer@1
