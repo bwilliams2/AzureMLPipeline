@@ -36,9 +36,9 @@ jobs:
         mode: upload
     environment: azureml:AzureML-ACPT-pytorch-1.13-py38-cuda11.7-gpu@latest
     compute: azureml:gpu-cluster
-    # distribution:
-    #   type: pytorch
-    #   process_count_per_instance: 1
+    distribution:
+      type: pytorch
+      process_count_per_instance: 1
     resources:
       instance_count: 2
   eval_model:
