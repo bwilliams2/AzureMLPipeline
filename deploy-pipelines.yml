@@ -18,7 +18,7 @@ steps:
 - task: AzureCLI@2
   name: InstalAzML
   inputs:
-    azureSubscription: 'BW-Demo-SandBox'
+    azureSubscription: 'BW-SandBox'
     scriptType: bash
     scriptLocation: 'inlineScript'
     inlineScript: |
@@ -30,7 +30,7 @@ steps:
 - task: AzureCLI@2
   name: CreateEndpoint
   inputs:
-    azureSubscription: 'BW-Demo-SandBox'
+    azureSubscription: 'BW-SandBox'
     scriptType: bash
     scriptLocation: 'inlineScript'
     inlineScript: |
@@ -39,7 +39,7 @@ steps:
 - task: AzureCLI@2
   name: CreateEndpointDeployment
   inputs:
-    azureSubscription: 'BW-Demo-SandBox'
+    azureSubscription: 'BW-SandBox'
     scriptType: bash
     scriptLocation: 'inlineScript'
     inlineScript: |

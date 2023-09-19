@@ -6,7 +6,7 @@ resources:
 
 variables: 
   ## Add this under variables section in the pipeline
-  azureSubscription: 'BW-Demo-SandBox'
+  azureSubscription: BW-SandBox
   appName: streamlit-pytorch-ml-app 
   containerRegistry: 24fa969cc6044fa287d354ceca4eb111
   imageRepository: pytorchmlapp
@@ -36,7 +36,7 @@ stages:
     - task: AzureCLI@2
       name: InstalAzML
       inputs:
-        azureSubscription: $(azureSubscription)
+        azureSubscription: 'BW-SandBox'
         scriptType: bash
         scriptLocation: 'inlineScript'
         inlineScript: |
