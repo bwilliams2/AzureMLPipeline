@@ -1,17 +1,20 @@
-# Use an official Streamlit runtime as a parent image
-FROM streamlit/streamlit:latest
+FROM python:3.9-slim
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy the requirements file into the container at /usr/src/app
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    software-properties-common \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY . .
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install -r requirements.txt
 
-# Make port 8501 available to the world outside this container
-EXPOSE 8501
+EXPOSE 8000
 
-# Run app.py when the container launches
-CMD ["streamlit", "run", "app.py"]
+HEALTHCHECK CMD curl --fail http://localhost:8000/_stcore/health
+
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8000", "--server.address=0.0.0.0"]
