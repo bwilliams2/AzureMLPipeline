@@ -41,7 +41,7 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az upgrade --yes
-          az acr build -t ${imageRepository} -r 24fa969cc6044fa287d354ceca4eb111 -f ./project/frontend/Dockerfile ./project/frontend/
+          az acr build -t ${imageRepository}:r$(build.buildid) -r 24fa969cc6044fa287d354ceca4eb111 -f ./project/frontend/Dockerfile ./project/frontend/
 
     ## Add the below snippet at the end of your pipeline
     - task: AzureWebAppContainer@1
