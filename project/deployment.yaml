@@ -4,7 +4,11 @@ endpoint_name: pytorch-model-deployment
 model: azureml:pytorch-test@latest
 code_configuration:
   code: "./src/score/"
-  scoring_script: score.py
-environment: azureml:AzureML-ACPT-pytorch-1.13-py38-cuda11.7-gpu@latest
+  scoring_script: score_with_data.py
+environment: azureml:scoreenvironment@latest
+environment_variables:
+    SUBSCRIPTION_ID: "3e2547d0-1f1a-4310-bf82-d94871df16ad"
+    RESOURCE_GROUP: "AzureMLRG"
+    WORKSPACE_NAME: "AzureMLWS"
 instance_type: Standard_NC4as_T4_v3
 instance_count: 1
